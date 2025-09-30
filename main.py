@@ -169,7 +169,7 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_list = user_list.get("values", [])
     
     if str(update.effective_user.id) in [user[0] for user in user_list if user]:
-        await context.bot.send_message(chat_id=update.effective_chat.id, text="سلام مجدد")
+        await context.bot.send_message(chat_id=update.effective_chat.id, text="سلام مجدد👋")
         if ref_args:
             if ref_args[0] != ref_user_id:
                 pass
@@ -178,6 +178,7 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     else:
         await context.bot.send_message(chat_id=update.effective_chat.id, text="سلام کاربر جدید\nخیلی خوش اومدی✌️🏻")
+        add_user_id_in_row(str(update.effective_user.id))
         
         sheet.values().append(spreadsheetId=SAMPLE_SPREADSHEET_ID, range="sheet3!A4:A", valueInputOption="USER_ENTERED", body={"values": [[update.effective_user.id]]}).execute()
 
@@ -229,6 +230,20 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
                                     sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=f"sheet4!{col_letter}{last_row}", valueInputOption="USER_ENTERED", body={"values": [[str(update.effective_user.id)]]}).execute()
 
+                    
+                        davat_shdeha = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=f"sheet5!A:ZZZ").execute().get("values", [])[0]
+                        if str(ref_args[0]) in davat_shdeha:
+                            col_index = davat_shdeha.index(str(ref_args[0]))
+                            col_letter = colnum_to_letter(col_index)
+
+                            col_data = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=f"sheet5!{col_letter}:{col_letter}").execute()
+                            col_data = col_data.get("values", [])
+
+                            last_row = len(col_data) + 1
+
+                            sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=f"sheet5!{col_letter}{last_row}", valueInputOption="USER_ENTERED", body={"values": [[str(update.effective_user.id)]]}).execute()
+                            
+                            
                                 
                 await context.bot.send_message(chat_id=ref_args[0], text="کاربر جدیدی با کد دعوت شما وارد ربات شد و شما یک شانس جدید در قرعه کشی دریافت کردید\nبرای مشاهده ی شانس های قرعه کشی خود به بخش <b>قرعه کشی ، هدایا و جوایز</b> مراجعه کنید", parse_mode="HTML")
 
@@ -243,43 +258,15 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     inline_markup = InlineKeyboardMarkup(inline_keyboard=[inline_keys])
 
     #پیام خوش آمد گویی
-    await context.bot.send_message(text = """سلام✨ 
-به ربات بزرگ SciSmart خوش اومدی!  🌱
-اینجا همه‌چیز برای رشد علمی و مهارتی تو مهیاست!
+    await context.bot.send_message(text = """
+به ربات scismart خوش اومدی!
 
-<b>🔸برای پرسیدن هر موضوعی درباره دوره، هربخشی از ربات که هستی، فقط کافیه اول جمله بگی «هوشا»؛ هوش مصنوعی اختصاصی دوره فوراً پاسخ می‌ده.  
+🔹برای استفاده از هوش مصنوعی ، کلید هوش مصنوعی رو بزن و سوالت رو بپرس.
 
-🔻یک هوش مصنوعی حرفه‌ای و رایگان هم داری که بدون محدودیت در هر زمینه‌ای همراهته. بزن رو دکمش و لذت ببر❤️</b>
-
-<u>بخش‌های ‌ربات 👇🏻</u>
-<b>پروفایل کاربری 👤</b>  
-اطلاعاتت، ویرایش و هرچه لازم داری همین‌جاست.
-
-<b>دوره جامع SciSmart 🧬</b>  
-از ثبت‌نام و جزوه تا اطلاعات اساتید، گواهینامه و کارگاه‌ها؛ همه در این بخش جمع شده.
-
-<b>مسابقه 🏆</b>  
-خودتو در چالش ملی SciSmart محک بزن؛ جوایز نقدی و دعوت به تیم‌های پژوهشی منتظرته.
-
-<b>قرعه‌کشی، هدایا و جوایز 🎰🥇</b>  
-هر ثبت‌نام یک شانس در قرعه‌کشی بزرگ؛ دسترسی رایگان، تخفیف‌ دوره‌ها و هدایا در راهه.
-
-<b>پژوهشگاه رویان 🎓</b>  
-بزرگ‌ترین و فعال‌ترین مرکز تحقیقاتی کشور پشتیبان علمی ماست؛ از تجربه پژوهشگرانش بهره ببر.
-
-<b>حامیان مالی و معنوی 💵❤️</b>  
-از موسسه دکتر خلیلی تا انجمن‌های دانشجویی، ببین چه کسانی کنار ما هستند.
-
-<b>دریافت پروژه تحقیقاتی پژوهشی 🥼</b>  
-پروژه‌های واقعی برای حل چالش‌های علمی آماده‌اند؛ توانایی‌ات را نشان بده و وارد تیم شو.
-
-<b>ما کی هستیم؟ 😎</b>  
-داستان آکادمی بیوسنتز و مسیرمون تا امروز رو اینجا بخون.
-
-<b>🔸انقدر جایزه داریم، انقدر قرعه‌کشی داریم، که تقریبا هیچکس دست خالی از این ربات برنمیگرده!
-پس حتما نوتیف ربات رو فعال بزار تا از طوفان هدایا جا نمونی 😉</b>
-
-<b><a href="https://t.me/SciSmartCourse">تلگرام دوره</a> | <a href="http://instagram.com/scismartcourse">اینستاگرام دوره</a> | <a href="https://x.com/sci_smart">توییتر دوره</a></b>""",
+🎓اگه درباره scismart هم سوالی داری میتونی سؤالاتت رو از هوشا، هوش مصنوعی دوره بپرسی فقط قبلش باید اسمش رو صدا بزنی مثلا :
+هوشا دوره کی برگزار میشه ؟
+هوشا بیوسنتز دیگه چیه ؟
+                                   """,
                                    chat_id=update.effective_chat.id,
                                    reply_to_message_id=update.message.message_id,
                                    reply_markup=inline_markup,
@@ -420,6 +407,16 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                                     reply_markup=ReplyKeyboardMarkup(submenu_jozve_jalaseh, resize_keyboard=True))
                 except Exception as e:
                     print(f"Error copying message in 'هوش مصنوعی در علم': {e}")
+
+        elif get_inviteds(update.effective_user.id) >= 5:
+            for i in range(2, 27):
+                try:
+                    await context.bot.copy_message(chat_id=update.effective_chat.id,
+                                                    from_chat_id="-1003038247209",
+                                                    message_id=i,
+                                                    reply_markup=ReplyKeyboardMarkup(submenu_jozve_jalaseh, resize_keyboard=True))
+                except Exception as e:
+                    print(f"Error copying message in 'هوش مصنوعی در علم': {e}")
         else:
             await update.message.reply_text("شما در این کارگاه ثبت‌نام نکرده‌اید.",
                                             reply_markup=ReplyKeyboardMarkup(submenu_jozve_jalaseh, resize_keyboard=True))        
@@ -427,6 +424,16 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if text == "آموزش اکسل":
 
         if is_in_workshop(update, context=context, kargah_user=text):
+            for i in range(2, 27):
+                try:
+                    await context.bot.copy_message(chat_id=update.effective_chat.id,
+                                                    from_chat_id="-1003034936559",
+                                                    message_id=i,
+                                                    reply_markup=ReplyKeyboardMarkup(submenu_jozve_jalaseh, resize_keyboard=True))
+                except Exception as e:
+                    print(f"Error copying message in 'آموزش اکسل': {e}")
+                    
+        elif get_inviteds(update.effective_user.id) >= 5:
             for i in range(2, 27):
                 try:
                     await context.bot.copy_message(chat_id=update.effective_chat.id,
@@ -450,6 +457,16 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                                     reply_markup=ReplyKeyboardMarkup(submenu_jozve_jalaseh, resize_keyboard=True))
                 except Exception as e:
                     print(f"Error copying message in 'لینکدین; ساخت پروفایل پژوهشی': {e}")
+                    
+        elif get_inviteds(update.effective_user.id) >= 3:
+            for i in range(2, 27):
+                try:
+                    await context.bot.copy_message(chat_id=update.effective_chat.id,
+                                                    from_chat_id="-1002979995683",
+                                                    message_id=i,
+                                                    reply_markup=ReplyKeyboardMarkup(submenu_jozve_jalaseh, resize_keyboard=True))
+                except Exception as e:
+                    print(f"Error copying message in 'لینکدین; ساخت پروفایل پژوهشی': {e}")
         else:
             await update.message.reply_text("شما در این کارگاه ثبت‌نام نکرده‌اید.",
                                             reply_markup=ReplyKeyboardMarkup(submenu_jozve_jalaseh, resize_keyboard=True))        
@@ -465,6 +482,17 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                                     reply_markup=ReplyKeyboardMarkup(submenu_jozve_jalaseh, resize_keyboard=True))
                 except Exception as e:
                     print(f"Error copying message in 'جستجوی حرفه‌ای منابع': {e}")
+                    
+        elif get_inviteds(update.effective_user.id) >= 3:
+            for i in range(2, 27):
+                try:
+                    await context.bot.copy_message(chat_id=update.effective_chat.id,
+                                                    from_chat_id="-1002932760623",
+                                                    message_id=i,
+                                                    reply_markup=ReplyKeyboardMarkup(submenu_jozve_jalaseh, resize_keyboard=True))
+                except Exception as e:
+                    print(f"Error copying message in 'جستجوی حرفه‌ای منابع': {e}")
+                    
         else:
             await update.message.reply_text("شما در این کارگاه ثبت‌نام نکرده‌اید.",
                                             reply_markup=ReplyKeyboardMarkup(submenu_jozve_jalaseh, resize_keyboard=True))        
@@ -513,7 +541,7 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if text == "دریافت گواهینامه 📜":
         if  is_approved_by_royan(update, context=context):
             await update.message.reply_text(
-                "📂 دریافت گواهینامه:",
+                "بعد از پایان دوره میتونی از طریق لینک زیر گواهی پایان دوره رو دریافت کنی .",
                 reply_markup=ReplyKeyboardMarkup(submenu_scismart, resize_keyboard=True)
             )
         else:
@@ -697,13 +725,20 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 award = row[14] if len(row) > 14 else None
                 winn_chance = row[15] if len(row) > 15 else None
 
-        
-        await update.message.reply_text(
-            f"شما <b>{winn_chance}</b> شانس در قرعه کشی ما دارید\n\n"
-            f"هدایا و جوایز تعلق گرفته به شما:\n🔸{award}",
-            parse_mode="HTML",
-            reply_markup=ReplyKeyboardMarkup(award_menu, resize_keyboard=True)
-        )
+        if is_hamkar(update.effective_user.id):
+            await update.message.reply_text(
+                f"شما <b>{winn_chance}</b> شانس در قرعه کشی ما دارید\n\n"
+                f"هدایا و جوایز تعلق گرفته به شما:\n🔸{award}",
+                parse_mode="HTML",
+                reply_markup=ReplyKeyboardMarkup(award_coworkers_menu, resize_keyboard=True)
+            )
+        else:
+                await update.message.reply_text(
+                f"شما <b>{winn_chance}</b> شانس در قرعه کشی ما دارید\n\n"
+                f"هدایا و جوایز تعلق گرفته به شما:\n🔸{award}",
+                parse_mode="HTML",
+                reply_markup=ReplyKeyboardMarkup(award_menu, resize_keyboard=True)
+            )
 
         for i in range(2, 18):
             try:
@@ -750,10 +785,28 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 print(f"Error copying message in 'دریافت پروژه ی تحقیقاتی-پژوهشی🥼': {e}")
 
     if text == "هوش مصنوعی📱":
-        await update.message.reply_text(
-            "📂 هوش مصنوعی:",
-            reply_markup=ReplyKeyboardMarkup(AI_keys, resize_keyboard=True)
-        )
+        if is_approved_by_royan(update, context):
+            mahdodiat_user = get_user_cupon(str(update.effective_user.id))
+
+            await context.bot.sendMessage(text=f"""
+راهنمای استفاده :
+<b>از طریق کلید ها میتونی هوش مصنوعی اشتراکی دلخواهت رو انتخاب کنی و ازش رایگان استفاده کنی.</b>
+🔹سقف استفاده از هوش مصنوعی ۲۵ پیام در روز است .  
+اما میتونی با دعوت 3 نفر در  ثبت نام دوره ظرفیت اون رو تا ۵۰ پیام افزایش بدی 
+و دوتا از کارگاه های تقویتی تکمیلی رو رایگان دریافت کنی .
+
+🔹اگر 5 نفر رو دعوت کنی ظرفیت استفاده از هوش مصنوعی تا ۷۵ پیام در روز افزایش پیدا می‌کنه و میتونی تمام کارگاه رو رایگان دریافت کنی .
+
+تعداد پیام مجاز شما در حال حاضر : <b>{mahdodiat_user}</b> پیام است.
+""",
+                                   reply_markup=ReplyKeyboardMarkup(AI_keys, resize_keyboard=True),
+                                   chat_id=update.effective_user.id,
+                                   parse_mode="HTML")
+        else:
+            await update.message.reply_text(
+                "باید ابتدا در دوره ثبت‌نام نهایی (پرداخت + ثبت‌نام در سایت) انجام بدید",
+                reply_markup=ReplyKeyboardMarkup(main_menu, resize_keyboard=True)
+            )
 
 
     if text == "Gemini":
@@ -867,7 +920,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 یا اگر درمورد دوره سوال داری، هرجای ربات اول جملت بگی هوشا و بعد سوالتو بپرسی جوابتو میده
 
-یا دیگه اگر خیلی نیاز به کمک داریژ مستقیم به ادمین آکادمی پیام بدی👇🏻
+یا دیگه اگر خیلی نیاز به کمک داری مستقیم به ادمین آکادمی پیام بدی👇🏻
 @BioSantezAc_admin""",
                                    chat_id=update.effective_chat.id,
                                    reply_to_message_id=update.message.message_id)
@@ -1207,8 +1260,8 @@ async def edit_profile_email(update: Update, context: ContextTypes.DEFAULT_TYPE)
             body={"values": baghali}
         ).execute()
         await update.message.reply_text("اطلاعات با موفقیت ثبت شد.", reply_markup=ReplyKeyboardMarkup(submenu_profile, resize_keyboard=True))
-        if is_hamkar(update.effective_user.id):
-            await sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=f"sheet1!S{hamkaran.index(str(update.effective_user.id))+2}", valueInputOption="USER_ENTERED", body={"values": [[1]]}).execute()
+        # if is_hamkar(update.effective_user.id):
+        #     await sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=f"sheet1!S{hamkaran.index(str(update.effective_user.id))+2}", valueInputOption="USER_ENTERED", body={"values": [[1]]}).execute()
 
     return ConversationHandler.END # پایان ویرایش اطلاعات
 
@@ -1582,6 +1635,11 @@ async def admin_approve_with_national_code(update: Update, context: ContextTypes
 
             if refferer_id:
                 increment_refferer_chance(refferer_id)
+                
+            inviter_id = find_inviter_by_ref(user_id)
+            
+            if inviter_id:
+                increment_inviter_chance(inviter_id)
 
             try:
                 await context.bot.sendMessage(text=f"کاربر: {name} با کدملی: {code} تایید شد.",
@@ -1667,6 +1725,58 @@ def increment_refferer_chance(user_id):
 
     return False
 
+
+
+def find_inviter_by_ref(ref_id):
+    data = sheet.values().get(
+        spreadsheetId=SAMPLE_SPREADSHEET_ID,
+        range="Sheet5!A1:ZZZ"
+    ).execute().get("values", [])
+
+    if not data:
+        return None
+
+    headers = data[0]   # ردیف اول = شناسه‌ی کاربران
+    columns = list(zip(*data))  # تبدیل سطرها به ستون‌ها
+
+    # بررسی هر ستون
+    for i, col in enumerate(columns):
+        if ref_id in col[1:]:  # [1:] یعنی زیر هدر
+            
+            return headers[i]  # همون شناسه‌ی کاربر
+
+    return None
+
+
+def increment_inviter_chance(user_id):
+
+    data = sheet.values().get(
+        spreadsheetId=SAMPLE_SPREADSHEET_ID,
+        range="Sheet1!A2:S"   # ستون A تا T
+    ).execute().get("values", [])
+
+    if not data:
+        return False
+
+    for i, row in enumerate(data, start=2):
+        if len(row) > 0 and row[0] == str(user_id):
+            current_value = 0
+            if len(row) >= 20 and row[19].isdigit():
+                current_value = int(row[19])
+
+            new_value = current_value + 1
+
+            # آپدیت ستون S
+            sheet.values().update(
+                spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                range=f"Sheet1!S{i}",
+                valueInputOption="USER_ENTERED",
+                body={"values": [[new_value]]}
+            ).execute()
+
+            return True
+
+    return False
 
 
 def get_refferer_chance(user_id):
@@ -2034,26 +2144,79 @@ def is_hamkar(user_id):
             return True
     return False
 
+
+def get_inviteds(user_id):
+    data = sheet.values().get(
+        spreadsheetId=SAMPLE_SPREADSHEET_ID,
+        range="Sheet1!A2:T"
+    ).execute().get("values", [])
+    
+    for row in data:
+        try:
+            if len(row) > 0 and row[0] == str(user_id):
+                inviteds = row[18]
+
+                return int(inviteds)
+        except Exception as e:
+            print(f"Error occurred while getting inviteds for user {user_id}: {e}")
+    return 0
+
+
 users_cupon = {}
 
 def get_user_cupon(user_id):
     current_time = time.time()
-
+    invite_status = get_inviteds(str(user_id))
+    mahdodiat = 0
+    
+    if invite_status >= 5:
+        mahdodiat = 75
+    elif invite_status >= 3:
+        mahdodiat = 50
+    else:
+        mahdodiat = 25       
+    
     if user_id not in users_cupon:
         # کاربر جدید
-        users_cupon[user_id] = {"value": 50, "last_update": current_time}
+        users_cupon[user_id] = {"value": mahdodiat, "last_update": current_time}
         return users_cupon[user_id]["value"]
 
     user = users_cupon[user_id]
 
     # بررسی کنیم آیا 24 ساعت گذشته؟
     if current_time - user["last_update"] >= 24 * 60 * 60:
-        user["value"] = 50
+        user["value"] = mahdodiat
         user["last_update"] = current_time
 
     return user["value"]
 
 
+def add_user_id_in_row(user_id: str):
+    """آیدی کاربر را در سطر 1 و آخرین ستون خالی اضافه می‌کند (اگر وجود نداشته باشد)"""
+    result = sheet.values().get(
+        spreadsheetId=SAMPLE_SPREADSHEET_ID,
+        range="sheet5!A1:ZZZ"
+    ).execute()
+    
+    values = result.get("values", [[]])
+    row_values = values[0] if values else []
+
+    # بررسی وجود کاربر
+    if str(user_id) in row_values:
+        return
+    
+    # اضافه کردن به انتهای سطر
+    row_values.append(str(user_id))
+
+    sheet.values().update(
+        spreadsheetId=SAMPLE_SPREADSHEET_ID,
+        range="sheet5!A1:ZZZ",
+        valueInputOption="USER_ENTERED",
+        body={"values": [row_values]}
+    ).execute()
+    
+    
+    
 kargah_conv = ConversationHandler(
     entry_points=[MessageHandler(filters.Regex("^ثبت افراد در کارگاه ها$"), admin_register_participants_start)],
     states={
