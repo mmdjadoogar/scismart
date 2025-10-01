@@ -533,7 +533,7 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await context.bot.copy_message(chat_id=update.effective_chat.id,
                                                 from_chat_id="-1002999857032",
                                                 message_id=i,
-                                                reply_markup=ReplyKeyboardMarkup(main_menu, resize_keyboard=True))
+                                                reply_markup=ReplyKeyboardMarkup(submenu_scismart, resize_keyboard=True))
             except Exception as e:
                 print(f"Error copying message in 'ثبت‌نام در کارگاه‌های تقویتی تکمیلی 💪': {e}")
 
@@ -733,22 +733,30 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 parse_mode="HTML",
                 reply_markup=ReplyKeyboardMarkup(award_coworkers_menu, resize_keyboard=True)
             )
+            for i in range(2, 18):
+                try:
+                    await context.bot.copy_message(chat_id=update.effective_chat.id,
+                                                    from_chat_id="-1002937744945",
+                                                    message_id=i,
+                                                    reply_markup=ReplyKeyboardMarkup(award_menu, resize_keyboard=True))
+                except Exception as e:
+                    print(f"Error copying message in 'دریافت لیست جوایز و شانس‌های من 🎁': {e}")
         else:
-                await update.message.reply_text(
+            await update.message.reply_text(
                 f"شما <b>{winn_chance}</b> شانس در قرعه کشی ما دارید\n\n"
                 f"هدایا و جوایز تعلق گرفته به شما:\n🔸{award}",
                 parse_mode="HTML",
                 reply_markup=ReplyKeyboardMarkup(award_menu, resize_keyboard=True)
             )
+            for i in range(2, 18):
+                try:
+                    await context.bot.copy_message(chat_id=update.effective_chat.id,
+                                                    from_chat_id="-1002937744945",
+                                                    message_id=i,
+                                                    reply_markup=ReplyKeyboardMarkup(award_menu, resize_keyboard=True))
+                except Exception as e:
+                    print(f"Error copying message in 'دریافت لیست جوایز و شانس‌های من 🎁': {e}")
 
-        for i in range(2, 18):
-            try:
-                await context.bot.copy_message(chat_id=update.effective_chat.id,
-                                                from_chat_id="-1002937744945",
-                                                message_id=i,
-                                                reply_markup=ReplyKeyboardMarkup(award_menu, resize_keyboard=True))
-            except Exception as e:
-                print(f"Error copying message in 'دریافت لیست جوایز و شانس‌های من 🎁': {e}")
 
 
     if text == "همکاری‌های من":
