@@ -738,7 +738,7 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     await context.bot.copy_message(chat_id=update.effective_chat.id,
                                                     from_chat_id="-1002937744945",
                                                     message_id=i,
-                                                    reply_markup=ReplyKeyboardMarkup(award_menu, resize_keyboard=True))
+                                                    reply_markup=ReplyKeyboardMarkup(award_coworkers_menu, resize_keyboard=True))
                 except Exception as e:
                     print(f"Error copying message in 'دریافت لیست جوایز و شانس‌های من 🎁': {e}")
         else:
