@@ -806,7 +806,7 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 🔹اگر 5 نفر رو دعوت کنی ظرفیت استفاده از هوش مصنوعی تا ۷۵ پیام در روز افزایش پیدا می‌کنه و میتونی تمام کارگاه رو رایگان دریافت کنی .
 
-تعداد پیام مجاز شما در حال حاضر : <b>{mahdodiat_user}</b> پیام است.
+تعداد پیام مجاز شما در حال حاضر : <b>{users_cupon[str(update.effective_user.id)]['value']}</b> پیام است.
 """,
                                    reply_markup=ReplyKeyboardMarkup(AI_keys, resize_keyboard=True),
                                    chat_id=update.effective_user.id,
