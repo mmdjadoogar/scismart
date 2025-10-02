@@ -806,7 +806,7 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 🔹اگر 5 نفر رو دعوت کنی ظرفیت استفاده از هوش مصنوعی تا ۷۵ پیام در روز افزایش پیدا می‌کنه و میتونی تمام کارگاه رو رایگان دریافت کنی .
 
-تعداد پیام مجاز شما در حال حاضر : <b>{users_cupon[str(update.effective_user.id)]['value']}</b> پیام است.
+تعداد پیام مجاز شما در حال حاضر : <b>{users_cupon[update.effective_user.id]['value']}</b> پیام است.
 """,
                                    reply_markup=ReplyKeyboardMarkup(AI_keys, resize_keyboard=True),
                                    chat_id=update.effective_user.id,
@@ -993,7 +993,7 @@ async def edit_profile_name_and_lastname_farsi(update: Update, context: ContextT
         await edit_profile_cancel(update, context)
         return ConversationHandler.END
     context.user_data["name_and_lastname_farsi"] = update.message.text
-    await update.message.reply_text("نام و نام خانوادگی(انگلیسی):\n(رای صدور گواهی انگلیسی ، حروف اول اسم و فامیل شما بزرگ باشد)", reply_markup=ReplyKeyboardMarkup(enseraf_menu, resize_keyboard=True))
+    await update.message.reply_text("نام و نام خانوادگی(انگلیسی):\n(برای صدور گواهی انگلیسی ، حروف اول اسم و فامیل شما بزرگ باشد)", reply_markup=ReplyKeyboardMarkup(enseraf_menu, resize_keyboard=True))
     return NAME_AND_LAST_NAME_ENGLISH
 
 
@@ -1282,6 +1282,7 @@ async def edit_profile_cancel(update: Update, context: ContextTypes.DEFAULT_TYPE
     else:
         await update.message.reply_text("به منوی پروفایل کاربری برگشتیم.",
                                         reply_markup=ReplyKeyboardMarkup(submenu_profile, resize_keyboard=True))
+    return ConversationHandler.END
 
 
 
