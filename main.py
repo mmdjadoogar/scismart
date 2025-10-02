@@ -180,10 +180,10 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if ref_args[0] == "MskjsdjSHlksjdHDlk87665MNVSR7hvUTSa7s6DJHgi7tasJHASi7tsIGDjyadtUAYTD":
                 approve_users = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range="sheet1!A2:R").execute().get("values", [])
                 for user in approve_users:
-                    if user[0] == str(update.effective_user.id):
-                        if user[16] != 1:
+                    if str(update.effective_user.id) in user:
+                        if str(user[16]) != "1":
                             try:
-                                sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=f"sheet1!R{approve_users.index(user)+2}", valueInputOption="USER_ENTERED", body={"values": [[1]]}).execute()
+                                sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=f"sheet1!Q{approve_users.index(user)+2}", valueInputOption="USER_ENTERED", body={"values": [[1]]}).execute()
                                 await context.bot.send_message(chat_id=update.effective_chat.id, text="ثبت نام شما با موفقیت تایید شد ✅")
                             except Exception as e:
                                 await context.bot.send_message(chat_id=ADMIN_ID, text=f"در تایید ثبت نام {update.effective_user.id} خطایی رخ داد: {e}")
