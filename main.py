@@ -195,6 +195,12 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     await context.bot.send_message(chat_id=ref_args[0], text="عزیزم خودت که نمیتونی با کد دعوت خودت وارد ربات بشی 😁")
                 except Exception as e:
                     print(f"Error sending message to user: {e}")
+                    
+            if ref_args[0] == "87365083756023859873645837652893":
+                try:
+                    await context.bot.send_message(chat_id=update.effective_chat.id, text="پرداخت با خطا مواجه شد\nبه ادمین ربات پیام دهید")
+                except Exception as e:
+                    print(f"Error sending message to user: {e}")
 
     else:
         # await context.bot.send_message(chat_id=update.effective_chat.id, text="سلام کاربر جدید\nخیلی خوش اومدی✌️🏻")
@@ -366,7 +372,7 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             
         else:
             await update.message.reply_text(
-                "باید در دوره ثبت‌نام نهایی (پرداخت + ثبت‌نام در سایت) انجام بدید",
+                "باید در دوره ثبت‌نام نهایی (پرداخت) انجام بدید",
                 reply_markup=ReplyKeyboardMarkup(submenu_scismart, resize_keyboard=True)
             )
             
@@ -382,7 +388,7 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 except Exception as e:
                     print(f"Error copying message in 'مهندسی بافت': {e}")
         else:
-            await update.message.reply_text("باید در دوره ثبت‌نام نهایی (پرداخت + ثبت‌نام در سایت) انجام بدید",
+            await update.message.reply_text("باید در دوره ثبت‌نام نهایی (پرداخت) انجام بدید",
                                             reply_markup=ReplyKeyboardMarkup(submenu_jozve_jalaseh, resize_keyboard=True))
        
        
@@ -397,7 +403,7 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 except Exception as e:
                     print(f"Error copying message in 'داکینگ مولکولی': {e}")
         else:
-            await update.message.reply_text("باید در دوره ثبت‌نام نهایی (پرداخت + ثبت‌نام در سایت) انجام بدید",
+            await update.message.reply_text("باید در دوره ثبت‌نام نهایی (پرداخت) انجام بدید",
                                             reply_markup=ReplyKeyboardMarkup(submenu_jozve_jalaseh, resize_keyboard=True))         
                 
     if text == "پایتون و R":
@@ -412,7 +418,7 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 except Exception as e:
                     print(f"Error copying message in 'پایتون و R': {e}")
         else:
-            await update.message.reply_text("باید در دوره ثبت‌نام نهایی (پرداخت + ثبت‌نام در سایت) انجام بدید",
+            await update.message.reply_text("باید در دوره ثبت‌نام نهایی (پرداخت) انجام بدید",
                                             reply_markup=ReplyKeyboardMarkup(submenu_jozve_jalaseh, resize_keyboard=True))        
                 
     if text == "بیوانفورماتیک":
@@ -427,7 +433,7 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 except Exception as e:
                     print(f"Error copying message in 'بیوانفورماتیک': {e}")
         else:
-            await update.message.reply_text("باید در دوره ثبت‌نام نهایی (پرداخت + ثبت‌نام در سایت) انجام بدید",
+            await update.message.reply_text("باید در دوره ثبت‌نام نهایی (پرداخت) انجام بدید",
                                             reply_markup=ReplyKeyboardMarkup(submenu_jozve_jalaseh, resize_keyboard=True))        
                 
     if text == "هوش مصنوعی در علم":
@@ -585,7 +591,7 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
         else:
             await update.message.reply_text(
-                "باید در دوره ثبت‌نام نهایی (پرداخت + ثبت‌نام در سایت) انجام بدید",
+                "باید در دوره ثبت‌نام نهایی (پرداخت) انجام بدید",
                 reply_markup=ReplyKeyboardMarkup(submenu_scismart, resize_keyboard=True)
             )
 
@@ -733,7 +739,7 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         else:
             await update.message.reply_text(
-                "باید در دوره ثبت‌نام نهایی (پرداخت + ثبت‌نام در سایت) انجام بدید",
+                "باید در دوره ثبت‌نام نهایی (پرداخت) انجام بدید",
                 reply_markup=ReplyKeyboardMarkup(main_menu, resize_keyboard=True)
             )
 
@@ -851,7 +857,7 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                    parse_mode="HTML")
         else:
             await update.message.reply_text(
-                "باید ابتدا در دوره ثبت‌نام نهایی (پرداخت + ثبت‌نام در سایت) انجام بدید",
+                "باید در دوره ثبت‌نام نهایی (پرداخت) انجام بدید",
                 reply_markup=ReplyKeyboardMarkup(main_menu, resize_keyboard=True)
             )
 
