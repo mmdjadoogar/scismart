@@ -173,15 +173,27 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_list = user_list.get("values", [])
     
     if str(update.effective_user.id) in [user[0] for user in user_list if user]:
-        await context.bot.send_message(chat_id=update.effective_chat.id, text="سلام مجدد👋")
+        # await context.bot.send_message(chat_id=update.effective_chat.id, text="سلام مجدد👋")
         if ref_args:
             if ref_args[0] != ref_user_id:
                 pass
+            elif ref_args[0] == "MskjsdjSHlksjdHDlk87665MNVSR7hvUTSa7s6DJHgi7tasJHASi7tsIGDjyadtUAYTD":
+                approve_users = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range="sheet1!A2:R").execute().get("values", [])
+                for user in approve_users:
+                    if user[0] == str(update.effective_user.id):
+                        if user[16] != 1:
+                            try:
+                                sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=f"sheet1!R{approve_users.index(user)+2}", valueInputOption="USER_ENTERED", body={"values": [[1]]}).execute()
+                                await context.bot.send_message(chat_id=update.effective_chat.id, text="ثبت نام شما با موفقیت تایید شد ✅")
+                            except Exception as e:
+                                await context.bot.send_message(chat_id=ADMIN_ID, text=f"در تایید ثبت نام {update.effective_user.id} خطایی رخ داد: {e}")
+                        else:
+                            await context.bot.send_message(chat_id=update.effective_chat.id, text="ثبت نام شما قبلا تایید شده است ✅")
             else:
                 await context.bot.send_message(chat_id=ref_args[0], text="عزیزم خودت که نمیتونی با کد دعوت خودت وارد ربات بشی 😁")
     
     else:
-        await context.bot.send_message(chat_id=update.effective_chat.id, text="سلام کاربر جدید\nخیلی خوش اومدی✌️🏻")
+        # await context.bot.send_message(chat_id=update.effective_chat.id, text="سلام کاربر جدید\nخیلی خوش اومدی✌️🏻")
         add_user_id_in_row(str(update.effective_user.id))
         
         sheet.values().append(spreadsheetId=SAMPLE_SPREADSHEET_ID, range="sheet3!A4:A", valueInputOption="USER_ENTERED", body={"values": [[update.effective_user.id]]}).execute()
@@ -255,22 +267,21 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await context.bot.send_message(chat_id=ref_args[0], text="عزیزم خودت که نمیتونی با کد دعوت خودت وارد ربات بشی 😁")
 
 
-    inline_keys = [InlineKeyboardButton("ثبت نام پژوهشگاه رویان", url="https://google.com")]
-    inline_markup = InlineKeyboardMarkup(inline_keyboard=[inline_keys])
-
     #پیام خوش آمد گویی
     await context.bot.send_message(text = """
-به ربات scismart خوش اومدی!
+👋 سلام دوست عزیز، خوش اومدی به دنیای SciSmart
 
-🔹برای استفاده از هوش مصنوعی ، کلید هوش مصنوعی رو بزن و سوالت رو بپرس.
+برای دسترسی به قسمت‌های مختلف ربات👇🏻
 
-🎓اگه درباره scismart هم سوالی داری میتونی سؤالاتت رو از هوشا، هوش مصنوعی دوره بپرسی فقط قبلش باید اسمش رو صدا بزنی مثلا :
-هوشا دوره کی برگزار میشه ؟
-هوشا بیوسنتز دیگه چیه ؟
+1⃣ اول باید بری پروفایلتو تکمیل کنی
+2⃣ از قسمت 👈🏻 <b>«دوره جامع SciSmart 🧬»</b> 👈🏻 ثبت نام در دوره اصلی یا بخش دسترسی سریع (سمت چپ بخش تایپ)، هزینه دوره رو پرداخت و ثبت نامتو نهایی کنی❤️
+
+‼️در غیر این صورت بخش‌های ربات غیرفعال هستن‼️
+
+🔔 راستی یادت نره نوتیف ربات رو فعال کنی تا خبر <b><u>قرعه‌کشی‌ها، مسابقه‌ها و رویدادهای ویژه</u></b> رو از دست ندی!
                                    """,
                                    chat_id=update.effective_chat.id,
                                    reply_to_message_id=update.message.message_id,
-                                   reply_markup=inline_markup,
                                    parse_mode="HTML")
 
     reply_markup = ReplyKeyboardMarkup(keyboard=main_menu,
@@ -278,7 +289,19 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                        input_field_placeholder="یک گزینه را انتخاب کنید")
     # ارسال پیام با کلیدها
     await context.bot.send_message(chat_id=update.effective_chat.id,
-                                   text="لطفا یک گزینه را انتخاب کنید:",
+                                   text="""
+🤖 اینجا فقط یادگیری نیست، هوش مصنوعی هم همراهته!
+
+🔸کافیه در دوره ثبت‌نام کنی و بعدش هر وقت سوالی داشتی، روی دکمه <b><u>«هوش مصنوعی»</u></b> بزنی و از هوش مصنوعی مورد علاقت سوالت رو بپرسی.
+۴ تا هوش مصنوعی جذاب، رایگان در اختیارتن که بری لذتشو ببری 😉
+
+🎓 تازه!
+می‌تونی با صدا زدن اسم هوش مصنوعی خود دوره با نام «هوشا» در هر قسمتی و موقعیتی از ربات،  در مورد دوره scismart سوال کنی!
+
+مثلا👇🏻
+«هوشا، دوره کی برگزار میشه؟»
+«هوشا، پروژه تحقیقاتی یعنی چی؟»
+                                   """,
                                    reply_markup=reply_markup)
 
 
@@ -2227,8 +2250,8 @@ def add_user_id_in_row(user_id: str):
         valueInputOption="USER_ENTERED",
         body={"values": [row_values]}
     ).execute()
-    
-    
+
+
     
 kargah_conv = ConversationHandler(
     entry_points=[MessageHandler(filters.Regex("^ثبت افراد در کارگاه ها$"), admin_register_participants_start)],
