@@ -1221,8 +1221,12 @@ async def edit_profile_email(update: Update, context: ContextTypes.DEFAULT_TYPE)
         
         await update.message.reply_text("اطلاعات با موفقیت ثبت شد.", reply_markup=ReplyKeyboardMarkup(submenu_profile, resize_keyboard=True))
         if is_hamkar(update.effective_user.id):
-            await sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=f"sheet1!S{hamkaran.index(str(update.effective_user.id))+2}", valueInputOption="USER_ENTERED", body={"values": [[1]]}).execute()
-
+            try:
+                    
+                await sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=f"sheet1!S{hamkaran.index(str(update.effective_user.id))+2}", valueInputOption="USER_ENTERED", body={"values": [[1]]}).execute()
+            except Exception as e:
+                print(f"Error updating hamkaran status: {e}")
+        return ConversationHandler.END  # پایان ویرایش اطلاعات
     else:
         user_row_gender = context.user_data.get("gender")
         user_row_name_and_lastname_farsi = context.user_data.get("name_and_lastname_farsi")
@@ -1271,8 +1275,7 @@ async def edit_profile_email(update: Update, context: ContextTypes.DEFAULT_TYPE)
         await update.message.reply_text("اطلاعات با موفقیت ثبت شد.", reply_markup=ReplyKeyboardMarkup(submenu_profile, resize_keyboard=True))
         # if is_hamkar(update.effective_user.id):
         #     await sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=f"sheet1!S{hamkaran.index(str(update.effective_user.id))+2}", valueInputOption="USER_ENTERED", body={"values": [[1]]}).execute()
-
-    return ConversationHandler.END # پایان ویرایش اطلاعات
+        return ConversationHandler.END # پایان ویرایش اطلاعات
 
 
 
