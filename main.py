@@ -177,11 +177,12 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if ref_args:
             # if ref_args[0] != ref_user_id:
             #     pass
-            if ref_args[0] == "MskjsdjSHlksjdHDlk87665MNVSR7hvUTSa7s6DJHgi7tasJHASi7tsIGDjyadtUAYTD":
+            if ref_args[0] == "2735982759385782763482754287":
                 approve_users = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range="sheet1!A2:R").execute().get("values", [])
                 for user in approve_users:
                     if str(update.effective_user.id) in user:
-                        if str(user[16]) != "1":
+                        approve = user[16] if len(user) > 16 else None
+                        if str(approve) != "1":
                             try:
                                 sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=f"sheet1!Q{approve_users.index(user)+2}", valueInputOption="USER_ENTERED", body={"values": [[1]]}).execute()
                                 await context.bot.send_message(chat_id=update.effective_chat.id, text="ثبت نام شما با موفقیت تایید شد ✅")
