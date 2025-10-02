@@ -175,9 +175,9 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if str(update.effective_user.id) in [user[0] for user in user_list if user]:
         # await context.bot.send_message(chat_id=update.effective_chat.id, text="سلام مجدد👋")
         if ref_args:
-            if ref_args[0] != ref_user_id:
-                pass
-            elif ref_args[0] == "MskjsdjSHlksjdHDlk87665MNVSR7hvUTSa7s6DJHgi7tasJHASi7tsIGDjyadtUAYTD":
+            # if ref_args[0] != ref_user_id:
+            #     pass
+            if ref_args[0] == "MskjsdjSHlksjdHDlk87665MNVSR7hvUTSa7s6DJHgi7tasJHASi7tsIGDjyadtUAYTD":
                 approve_users = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range="sheet1!A2:R").execute().get("values", [])
                 for user in approve_users:
                     if user[0] == str(update.effective_user.id):
@@ -189,9 +189,12 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                 await context.bot.send_message(chat_id=ADMIN_ID, text=f"در تایید ثبت نام {update.effective_user.id} خطایی رخ داد: {e}")
                         else:
                             await context.bot.send_message(chat_id=update.effective_chat.id, text="ثبت نام شما قبلا تایید شده است ✅")
-            else:
-                await context.bot.send_message(chat_id=ref_args[0], text="عزیزم خودت که نمیتونی با کد دعوت خودت وارد ربات بشی 😁")
-    
+            if ref_args[0] == ref_user_id:
+                try:
+                    await context.bot.send_message(chat_id=ref_args[0], text="عزیزم خودت که نمیتونی با کد دعوت خودت وارد ربات بشی 😁")
+                except Exception as e:
+                    print(f"Error sending message to user: {e}")
+
     else:
         # await context.bot.send_message(chat_id=update.effective_chat.id, text="سلام کاربر جدید\nخیلی خوش اومدی✌️🏻")
         add_user_id_in_row(str(update.effective_user.id))
