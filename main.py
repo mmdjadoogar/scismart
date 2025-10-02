@@ -278,6 +278,12 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 ‼️در غیر این صورت بخش‌های ربات غیرفعال هستن‼️
 
+<b>به موارد زیر دقت کن</b>👇🏻
+
+🔻با مرورگر خود تلگرام هزینه رو پرداخت کن که اتومات ثبت‌نامت نهایی بشه (چون که مرورگرهای دیگه، تلگرامو فیلتر کردن)
+🔻در غیر این صورت، باید بصورت دستی به ادمین درخواست بدی که برات دستی رباتو فعال کنه
+
+
 🔔 راستی یادت نره نوتیف ربات رو فعال کنی تا خبر <b><u>قرعه‌کشی‌ها، مسابقه‌ها و رویدادهای ویژه</u></b> رو از دست ندی!
                                    """,
                                    chat_id=update.effective_chat.id,
@@ -548,6 +554,11 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             except Exception as e:
                 print(f"Error copying message in 'اطلاعات اساتیدℹ️': {e}")
 
+            
+    if text == "ثبت نام در دوره ی اصلی✍🏻":
+        await context.bot.send_message(chat_id=update.effective_chat.id,
+                                       text="برای ثبت نام در دوره ی اصلی روی لینک زیر کلیک کنید\n\n https://zarinp.al/747156",
+                                       reply_markup=ReplyKeyboardMarkup(submenu_scismart, resize_keyboard=True))
             
    
     if text == "ثبت‌نام در کارگاه‌های تقویتی تکمیلی 💪":
@@ -967,7 +978,7 @@ async def register_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(text = "لینک ثبت نام دوره 👇🏻",
                                    chat_id=update.effective_chat.id,
                                    reply_to_message_id=update.message.message_id,
-                                   reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("ثبت نام", url="https://google.com")]]))
+                                   reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("ثبت نام", url="https://zarinp.al/747156")]]))
 
 
 def fa_to_en_numbers(text: str) -> str:
