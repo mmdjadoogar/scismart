@@ -342,6 +342,17 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "📂 ما کی میباشیم؟(درباره ی ما):",
             reply_markup=ReplyKeyboardMarkup(submenu_about, resize_keyboard=True)
         )
+        
+        
+    if text == "بوت‌کمپ‌های تخصصی حضوری 🏢":
+        for i in range(2, 17):
+            try:
+                await context.bot.copy_message(chat_id=update.effective_chat.id,
+                                                from_chat_id="-1002995528811",
+                                                message_id=i,
+                                                reply_markup=ReplyKeyboardMarkup(submenu_scismart, resize_keyboard=True))
+            except Exception as e:
+                print(f"Error copying message in 'بوت‌کمپ‌های تخصصی حضوری': {e}")
 
     if text == "پیام به ادمین💬":
         return await feedback_message(update, context)
