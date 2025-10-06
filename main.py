@@ -54,6 +54,8 @@ TOKEN = config('token')
 BOT_USERNAME = '@SciSmartbot' # نام کاربری ربات
 ADMIN_ID = [602439009, 493060465, 7524316121] # mmd(programer), sajad, dooste sajad
 
+users_cupon = {}
+
 # دکمه ها
 main_menu = [
     [KeyboardButton("دوره جامع scismart🧬"), KeyboardButton("پروفایل کاربری👤")],
@@ -2219,7 +2221,6 @@ def get_inviteds(user_id):
     return 0
 
 
-users_cupon = {}
 
 def get_user_cupon(user_id):
     current_time = time.time()
