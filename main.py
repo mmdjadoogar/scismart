@@ -2288,6 +2288,7 @@ def add_user_id_in_row(user_id: str):
 
 
 async def match_inviteds_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    pass
     
 
 
