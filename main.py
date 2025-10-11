@@ -56,6 +56,8 @@ ADMIN_ID = [602439009, 493060465, 7524316121] # mmd(programer), sajad, dooste sa
 
 users_cupon = {}
 
+global national_codes
+
 # دکمه ها
 main_menu = [
     [KeyboardButton("دوره جامع scismart🧬"), KeyboardButton("پروفایل کاربری👤")],
@@ -320,7 +322,8 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 «هوشا، دوره کی برگزار میشه؟»
 «هوشا، پروژه تحقیقاتی یعنی چی؟»
                                    """,
-                                   reply_markup=reply_markup)
+                                   reply_markup=reply_markup,
+                                   parse_mode="HTML")
 
 
 # تابع جابجایی بین دکمه ها
@@ -1478,8 +1481,6 @@ async def ai_chat_end(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return ConversationHandler.END
 
 
-global national_codes
-
 async def admin_send_national_code_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("لطفا کد ملی کاربران را ارسال کنید:\n(هر کدوم تو یک خط)",
                                     reply_markup=ReplyKeyboardMarkup(enseraf_menu, resize_keyboard=True))
@@ -2085,7 +2086,7 @@ async def deepseek_chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
         completion = client.chat.completions.create(
-        model="deepseek/deepseek-r1-distill-llama-70b",
+        model="deepseek/deepseek-chat-v3.1",
         messages=[
             {
             "role": "user",
@@ -2218,13 +2219,13 @@ def is_hamkar(user_id):
 def get_inviteds(user_id):
     data = sheet.values().get(
         spreadsheetId=SAMPLE_SPREADSHEET_ID,
-        range="Sheet1!A2:T"
+        range="Sheet1!A2:U"
     ).execute().get("values", [])
     
     for row in data:
         try:
             if len(row) > 0 and row[0] == str(user_id):
-                inviteds = row[18]
+                inviteds = row[18] if len(row) >= 18 else 0
 
                 return int(inviteds)
         except Exception as e:
@@ -2283,6 +2284,11 @@ def add_user_id_in_row(user_id: str):
         valueInputOption="USER_ENTERED",
         body={"values": [row_values]}
     ).execute()
+
+
+
+async def match_inviteds_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    
 
 
     
