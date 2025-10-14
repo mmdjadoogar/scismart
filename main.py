@@ -590,7 +590,7 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             
     if text == "ثبت نام در دوره ی اصلی✍🏻":
         await context.bot.send_message(chat_id=update.effective_chat.id,
-                                       text="برای ثبت نام در دوره ی اصلی روی لینک زیر کلیک کنید\n\n https://aqayepardakht.ir/14298",
+                                       text="برای ثبت نام در دوره ی اصلی روی لینک زیر کلیک کنید\n\n https://zarinp.al/747156",
                                        reply_markup=ReplyKeyboardMarkup(submenu_scismart, resize_keyboard=True))
             
    
@@ -1011,7 +1011,7 @@ async def register_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(text = "لینک ثبت نام دوره 👇🏻",
                                    chat_id=update.effective_chat.id,
                                    reply_to_message_id=update.message.message_id,
-                                   reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("ثبت نام", url="https://aqayepardakht.ir/14298")]]))
+                                   reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("ثبت نام", url="https://zarinp.al/747156")]]))
 
 
 def fa_to_en_numbers(text: str) -> str:
