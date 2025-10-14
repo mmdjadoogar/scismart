@@ -314,6 +314,24 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                    reply_markup=reply_markup,
                                    parse_mode="HTML")
 
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="""
+🔻اطلاعیه‌های دوره در بسترهای مجازی قرار میگیرن👌🏻
+🔻موج‌های تخفیفات و قرعه‌کشی هم اونجا منتشر میشن😉
+
+پس دنبال کن که جا نمونی ✌️🏻
+
+🔸تلگرام دوره بزرگ SciSmart
+https://t.me/SciSmartCourse
+
+
+🔸 اینستاگرام دوره بزرگ SciSmart 
+http://instagram.com/scismartcourse
+
+
+🔸توییتر (ایکس) دوره بزرگ SciSmart 
+https://x.com/sci_smart
+                                   """)
+
 
 # تابع جابجایی بین دکمه ها
 async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
