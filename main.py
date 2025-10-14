@@ -31,18 +31,7 @@ SAMPLE_SPREADSHEET_ID = config('SAMPLE_SPREADSHEET_ID')   #  شناسه ی شی�
 service = build("sheets", "v4", credentials=credentials)
 sheet = service.spreadsheets()  #  اینم شیته که باهاش کار میکنیم
 
-# # خواندن داده های شیت
-# result = (
-#         sheet.values()
-#         .get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range="sheet1!A1")
-#         .execute()
-#     )
-
-# values = result.get("values", [])  # اینجا سر و ته اضافی دیتارو میزنیم و یه لیست تر و تمیز ازش میسازیم
-
-
 # بیلبیلک های جمنای
-# GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent"
 GEMINI_API_KEY = config('GEMINI_API_KEY')
 # SYSTEM_PROMPT = "تو یک ربات تلگرامی به اسم غلامرضا هستی. دوستانه و مودب و خودمونی به زبان فارسی صحبت کن"
 # SYSTEM_PROMPT_PERMANENT = "تو یک متخصص در حوزه ی علوم زیستی هستی و به سوالات در این زمینه پاسخ میدهی."
@@ -583,7 +572,7 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             
     if text == "ثبت نام در دوره ی اصلی✍🏻":
         await context.bot.send_message(chat_id=update.effective_chat.id,
-                                       text="برای ثبت نام در دوره ی اصلی روی لینک زیر کلیک کنید\n\n https://zarinp.al/747156",
+                                       text="برای ثبت نام در دوره ی اصلی روی لینک زیر کلیک کنید\n\n https://aqayepardakht.ir/14298",
                                        reply_markup=ReplyKeyboardMarkup(submenu_scismart, resize_keyboard=True))
             
    
@@ -1004,7 +993,7 @@ async def register_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(text = "لینک ثبت نام دوره 👇🏻",
                                    chat_id=update.effective_chat.id,
                                    reply_to_message_id=update.message.message_id,
-                                   reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("ثبت نام", url="https://zarinp.al/747156")]]))
+                                   reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("ثبت نام", url="https://aqayepardakht.ir/14298")]]))
 
 
 def fa_to_en_numbers(text: str) -> str:
@@ -1563,8 +1552,9 @@ async def admin_send_award_list(update: Update, context: ContextTypes.DEFAULT_TY
         phone_number = row[6] if len(row) > 6 else None
         award = row[14] if len(row) > 14 else None
         if award:
-            await update.message.reply_text(f"کاربر: {name_lastname}\nکد ملی: {national_code}\nشماره تلفن: {phone_number}\nجایزه ها: {award}")
-            national_code_list.append(national_code)
+            if award != 'بدون جایزه':
+                await update.message.reply_text(f"کاربر: {name_lastname}\nکد ملی: {national_code}\nشماره تلفن: {phone_number}\nجایزه ها: {award}")
+                national_code_list.append(national_code)
 
     N_code_message = ""
     for N_code in national_code_list:
@@ -2287,8 +2277,11 @@ def add_user_id_in_row(user_id: str):
 
 
 
-async def match_inviteds_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    pass
+# async def match_inviteds_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+#     users = sheet.values().get(
+#         spreadsheetId=SAMPLE_SPREADSHEET_ID,
+#         range="sheet1!"
+#     )
     
 
 
@@ -2403,6 +2396,7 @@ if __name__ == "__main__":
     application.add_handler(CommandHandler("start", start_command))
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(CommandHandler("register", register_command))
+    # application.add_handler(CommandHandler("match_inviteds", match_inviteds_command))
     application.add_handler(broadcast_conv)
     application.add_handler(admin_send_with_national_code)
     application.add_handler(admin_approve_with_national_code_conv)
