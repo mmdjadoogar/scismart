@@ -51,8 +51,7 @@ global national_codes
 main_menu = [
     [KeyboardButton("دوره جامع scismart🧬"), KeyboardButton("پروفایل کاربری👤")],
     [KeyboardButton("🎰 قرعه‌کشی، هدایا و جوایز  🥇"), KeyboardButton("مسابقه🏆")],
-    [KeyboardButton("❤️ حامیان مالی و معنوی 💵"), KeyboardButton("پژوهشگاه رویان🎓")],
-    [KeyboardButton("دریافت پروژه تحقیقاتی پژوهشی🥼")],
+    [KeyboardButton("❤️ حامیان مالی و معنوی 💵"), KeyboardButton("دریافت پروژه تحقیقاتی پژوهشی🥼")],
     [KeyboardButton("هوش مصنوعی📱"), KeyboardButton("مارو بشناس 👋")]
 ]
 
@@ -840,15 +839,15 @@ async def menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await get_ref_link(update, context)
         
 
-    if text == "پژوهشگاه رویان🎓":
-        for i in range(2, 18):
-            try:
-                await context.bot.copy_message(chat_id=update.effective_chat.id,
-                                                from_chat_id="-1002967942981",
-                                                message_id=i,
-                                                reply_markup=ReplyKeyboardMarkup(main_menu, resize_keyboard=True))
-            except Exception as e:
-                print(f"Error copying message in 'پژوهشگاه رویان🎓': {e}")
+    # if text == "پژوهشگاه رویان🎓":
+    #     for i in range(2, 18):
+    #         try:
+    #             await context.bot.copy_message(chat_id=update.effective_chat.id,
+    #                                             from_chat_id="-1002967942981",
+    #                                             message_id=i,
+    #                                             reply_markup=ReplyKeyboardMarkup(main_menu, resize_keyboard=True))
+    #         except Exception as e:
+    #             print(f"Error copying message in 'پژوهشگاه رویان🎓': {e}")
 
     if text == "دریافت پروژه تحقیقاتی پژوهشی🥼":
         for i in range(2, 18):
